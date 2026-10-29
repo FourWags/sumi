@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:latin="http://schemas.android.com/apk/res-auto" latin:rowHeight="25.0%p" latin:verticalGap="0.5%p" latin:horizontalGap="0.7%p" latin:keyboardTopPadding="0%p" latin:keyboardBottomPadding="0%p" latin:keyboardLeftPadding="0%p" latin:keyboardRightPadding="0%p">
+    <include latin:keyboardLayout="@xml/key_styles_common" />
+    <Row latin:keyWidth="11.11111111111111%p">
+        <Key latin:keySpec="1" />
+        <Key latin:keySpec="2" />
+        <Key latin:keySpec="3" />
+        <Key latin:keySpec="4" />
+        <Key latin:keySpec="5" />
+        <Key latin:keySpec="6" />
+        <Key latin:keySpec="7" />
+        <Key latin:keySpec="8" />
+        <Key latin:keySpec="9" />
+    </Row>
+    <Row latin:keyWidth="11.11111111111111%p">
+        <Key latin:keySpec="0" />
+        <Key latin:keySpec="?" />
+        <Key latin:keySpec="!" />
+        <Key latin:keySpec="@" />
+        <Key latin:keySpec="#" />
+        <Key latin:keySpec="$" />
+        <Key latin:keySpec="%" />
+        <Key latin:keySpec="&amp;" />
+        <Key latin:keySpec="_" />
+    </Row>
+    <Row latin:keyWidth="11.11111111111111%p">
+        <Key latin:keySpec="*" />
+        <Key latin:keySpec="(" />
+        <Key latin:keySpec=")" />
+        <Key latin:keySpec="-" />
+        <Key latin:keySpec="+" />
+        <Key latin:keySpec="=" />
+        <Key latin:keySpec="." />
+        <Key latin:keySpec=":" />
+        <Key latin:keySpec="&quot;" />
+    </Row>
+    <Row latin:keyWidth="11.11111111111111%p">
+        <Key latin:keyStyle="toAlphaKeyStyle" />
+        <Key latin:keyStyle="toMoreSymbolKeyStyle" />
+        <Key latin:keySpec="," />
+        <Key latin:keySpec="/" />
+        <Key latin:keyStyle="spaceKeyStyle" latin:keyWidth="22.22222222222222%p" />
+        <Key latin:keyStyle="deleteKeyStyle" />
+        <Key latin:keyStyle="enterKeyStyle" />
+        <Key latin:keySpec="'" latin:keyWidth="fillRight" />
+    </Row>
+</Keyboard>

@@ -1,0 +1,11 @@
+{
+  "name": "Sage & Linen",
+  "keyboard": {
+    "surface": "#C4BAA3",
+    "key": "#94A382",
+    "function": "#B7C2A6",
+    "ink": "#211B22",
+    "hint": "#211B22",
+    "stripInk": "#211B22"
+  }
+}

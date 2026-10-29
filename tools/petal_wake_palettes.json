@@ -1,0 +1,572 @@
+{
+  "source": "Approved curated sixteen family themes; reworked Sage & Linen and Rose Porcelain, 2026-10-16; Sumi neutral additions2026-10-24",
+  "palettes": [
+    {
+      "id": "rose",
+      "name": "Rose Porcelain",
+      "keyboard": {
+        "surface": "#8A4D63",
+        "key": "#F5F0E8",
+        "function": "#E6B4C5",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9F9C97",
+        "functionOutline": "#967580",
+        "keyShadow": "#BDB9B3",
+        "functionShadow": "#B18B98"
+      },
+      "legacy_index": 0,
+      "icon": {
+        "background": "#8A4D63",
+        "keycap": "#F5F0E8",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#E6B4C5",
+        "rightLeaf": "#F5F0E8",
+        "base": "#E6B4C5",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "sage",
+      "name": "Sage & Linen",
+      "keyboard": {
+        "surface": "#596C5A",
+        "key": "#EEE4CF",
+        "function": "#D9C7AB",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9B9487",
+        "functionOutline": "#8D816F",
+        "keyShadow": "#B7B09F",
+        "functionShadow": "#A79984"
+      },
+      "legacy_index": 1,
+      "icon": {
+        "background": "#596C5A",
+        "keycap": "#EEE4CF",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#D9C7AB",
+        "rightLeaf": "#EEE4CF",
+        "base": "#D9C7AB",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "navy",
+      "name": "Harbor Jade",
+      "keyboard": {
+        "surface": "#142C47",
+        "key": "#72C9BB",
+        "function": "#D5F1CE",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#4A837A",
+        "functionOutline": "#8A9D86",
+        "keyShadow": "#589B90",
+        "functionShadow": "#A4BA9F"
+      },
+      "legacy_index": 8,
+      "icon": {
+        "background": "#142C47",
+        "keycap": "#72C9BB",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#D5F1CE",
+        "rightLeaf": "#72C9BB",
+        "base": "#D5F1CE",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "ocean",
+      "name": "Tidepool Glass",
+      "keyboard": {
+        "surface": "#D5E7E2",
+        "key": "#3B7775",
+        "function": "#254E65",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#264D4C",
+        "functionOutline": "#183342",
+        "keyShadow": "#2D5C5A",
+        "functionShadow": "#1C3C4E"
+      },
+      "legacy_index": 4,
+      "icon": {
+        "background": "#D5E7E2",
+        "keycap": "#3B7775",
+        "stem": "#211B22",
+        "leftLeaf": "#254E65",
+        "rightLeaf": "#3B7775",
+        "base": "#254E65",
+        "mark": "#FFF8F0",
+        "outline": "#211B22"
+      }
+    },
+    {
+      "id": "blush",
+      "name": "Blush Denim",
+      "keyboard": {
+        "surface": "#3A5275",
+        "key": "#DFB1BE",
+        "function": "#C7DDEC",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#91737C",
+        "functionOutline": "#819099",
+        "keyShadow": "#AC8892",
+        "functionShadow": "#99AAB6"
+      },
+      "legacy_index": 12,
+      "icon": {
+        "background": "#3A5275",
+        "keycap": "#DFB1BE",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#C7DDEC",
+        "rightLeaf": "#DFB1BE",
+        "base": "#C7DDEC",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "arctic",
+      "name": "Arctic Sail",
+      "keyboard": {
+        "surface": "#244C72",
+        "key": "#B7DFF3",
+        "function": "#EEF2FA",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#77919E",
+        "functionOutline": "#9B9DA2",
+        "keyShadow": "#8DACBB",
+        "functionShadow": "#B7BAC0"
+      },
+      "legacy_index": 15,
+      "icon": {
+        "background": "#244C72",
+        "keycap": "#B7DFF3",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#EEF2FA",
+        "rightLeaf": "#B7DFF3",
+        "base": "#EEF2FA",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "violet",
+      "name": "Moonlit Orchid",
+      "keyboard": {
+        "surface": "#302940",
+        "key": "#B79AD7",
+        "function": "#D7C2F2",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#77648C",
+        "functionOutline": "#8C7E9D",
+        "keyShadow": "#8D77A6",
+        "functionShadow": "#A695BA"
+      },
+      "legacy_index": 9,
+      "icon": {
+        "background": "#302940",
+        "keycap": "#B79AD7",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#D7C2F2",
+        "rightLeaf": "#B79AD7",
+        "base": "#D7C2F2",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "berry",
+      "name": "Berry Sorbet",
+      "keyboard": {
+        "surface": "#E8BCD7",
+        "key": "#72254F",
+        "function": "#452D62",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#4A1833",
+        "functionOutline": "#2D1D40",
+        "keyShadow": "#581C3D",
+        "functionShadow": "#35234B"
+      },
+      "legacy_index": 16,
+      "icon": {
+        "background": "#E8BCD7",
+        "keycap": "#72254F",
+        "stem": "#211B22",
+        "leftLeaf": "#452D62",
+        "rightLeaf": "#72254F",
+        "base": "#452D62",
+        "mark": "#FFF8F0",
+        "outline": "#211B22"
+      }
+    },
+    {
+      "id": "vermilion",
+      "name": "Vermilion Ink",
+      "keyboard": {
+        "surface": "#172C3B",
+        "key": "#F18069",
+        "function": "#F2CA82",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9D5344",
+        "functionOutline": "#9D8354",
+        "keyShadow": "#BA6351",
+        "functionShadow": "#BA9C64"
+      },
+      "legacy_index": 20,
+      "icon": {
+        "background": "#172C3B",
+        "keycap": "#F18069",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#F2CA82",
+        "rightLeaf": "#F18069",
+        "base": "#F2CA82",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "lemon",
+      "name": "Lemon Grove",
+      "keyboard": {
+        "surface": "#F1E7A6",
+        "key": "#346C55",
+        "function": "#31586E",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#224637",
+        "functionOutline": "#203948",
+        "keyShadow": "#285341",
+        "functionShadow": "#264455"
+      },
+      "legacy_index": 21,
+      "icon": {
+        "background": "#F1E7A6",
+        "keycap": "#346C55",
+        "stem": "#211B22",
+        "leftLeaf": "#31586E",
+        "rightLeaf": "#346C55",
+        "base": "#31586E",
+        "mark": "#FFF8F0",
+        "outline": "#211B22"
+      }
+    },
+    {
+      "id": "cobalt",
+      "name": "Cobalt Bloom",
+      "keyboard": {
+        "surface": "#F6BCAD",
+        "key": "#264AA0",
+        "function": "#34406E",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#193068",
+        "functionOutline": "#222A48",
+        "keyShadow": "#1D397B",
+        "functionShadow": "#283155"
+      },
+      "legacy_index": 24,
+      "icon": {
+        "background": "#F6BCAD",
+        "keycap": "#264AA0",
+        "stem": "#211B22",
+        "leftLeaf": "#34406E",
+        "rightLeaf": "#264AA0",
+        "base": "#34406E",
+        "mark": "#FFF8F0",
+        "outline": "#211B22"
+      }
+    },
+    {
+      "id": "pistachio",
+      "name": "Pistachio Plum",
+      "keyboard": {
+        "surface": "#CCD98F",
+        "key": "#612750",
+        "function": "#3B4569",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#3F1934",
+        "functionOutline": "#262D44",
+        "keyShadow": "#4B1E3E",
+        "functionShadow": "#2D3551"
+      },
+      "legacy_index": 25,
+      "icon": {
+        "background": "#CCD98F",
+        "keycap": "#612750",
+        "stem": "#211B22",
+        "leftLeaf": "#3B4569",
+        "rightLeaf": "#612750",
+        "base": "#3B4569",
+        "mark": "#FFF8F0",
+        "outline": "#211B22"
+      }
+    },
+    {
+      "id": "marigold",
+      "name": "Marigold Sail",
+      "keyboard": {
+        "surface": "#183455",
+        "key": "#F1D95B",
+        "function": "#FFE9A8",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9D8D3B",
+        "functionOutline": "#A6976D",
+        "keyShadow": "#BAA746",
+        "functionShadow": "#C4B381"
+      },
+      "legacy_index": 26,
+      "icon": {
+        "background": "#183455",
+        "keycap": "#F1D95B",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#FFE9A8",
+        "rightLeaf": "#F1D95B",
+        "base": "#FFE9A8",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "coral",
+      "name": "Coral Reef",
+      "keyboard": {
+        "surface": "#EEAD94",
+        "key": "#19515F",
+        "function": "#313F70",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#10353E",
+        "functionOutline": "#202949",
+        "keyShadow": "#133E49",
+        "functionShadow": "#263156"
+      },
+      "legacy_index": 27,
+      "icon": {
+        "background": "#EEAD94",
+        "keycap": "#19515F",
+        "stem": "#211B22",
+        "leftLeaf": "#313F70",
+        "rightLeaf": "#19515F",
+        "base": "#313F70",
+        "mark": "#FFF8F0",
+        "outline": "#211B22"
+      }
+    },
+    {
+      "id": "chartreuse",
+      "name": "Chartreuse Smoke",
+      "keyboard": {
+        "surface": "#354351",
+        "key": "#C5D46E",
+        "function": "#DCEAB1",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#808A48",
+        "functionOutline": "#8F9873",
+        "keyShadow": "#98A355",
+        "functionShadow": "#A9B488"
+      },
+      "legacy_index": 32,
+      "icon": {
+        "background": "#354351",
+        "keycap": "#C5D46E",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#DCEAB1",
+        "rightLeaf": "#C5D46E",
+        "base": "#DCEAB1",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "amethyst",
+      "name": "Amethyst Ice",
+      "keyboard": {
+        "surface": "#67428A",
+        "key": "#C4E4EF",
+        "function": "#E3D1F3",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#7F949B",
+        "functionOutline": "#94889E",
+        "keyShadow": "#97B0B8",
+        "functionShadow": "#AFA1BB"
+      },
+      "legacy_index": 38,
+      "icon": {
+        "background": "#67428A",
+        "keycap": "#C4E4EF",
+        "stem": "#FFF8F0",
+        "leftLeaf": "#E3D1F3",
+        "rightLeaf": "#C4E4EF",
+        "base": "#E3D1F3",
+        "mark": "#211B22",
+        "outline": "#FFF8F0"
+      }
+    },
+    {
+      "id": "standardlight",
+      "name": "Standard Light",
+      "legacy_index": 40,
+      "keyboard": {
+        "surface": "#E6E6E6",
+        "key": "#FFFFFF",
+        "function": "#D1D1D1",
+        "ink": "#222222",
+        "hint": "#222222",
+        "stripInk": "#222222",
+        "keyOutline": "#A3A3A3",
+        "functionOutline": "#8F8F8F",
+        "keyShadow": "#BDBDBD",
+        "functionShadow": "#AEAEAE"
+      },
+      "icon": {
+        "background": "#E6E6E6",
+        "keycap": "#FFFFFF",
+        "stem": "#222222",
+        "leftLeaf": "#D1D1D1",
+        "rightLeaf": "#FFFFFF",
+        "base": "#D1D1D1",
+        "mark": "#222222",
+        "outline": "#222222"
+      }
+    },
+    {
+      "id": "standarddark",
+      "name": "Standard Dark",
+      "legacy_index": 41,
+      "keyboard": {
+        "surface": "#181818",
+        "key": "#333333",
+        "function": "#484848",
+        "ink": "#F5F5F5",
+        "hint": "#F5F5F5",
+        "stripInk": "#F5F5F5",
+        "keyOutline": "#6B6B6B",
+        "functionOutline": "#808080",
+        "keyShadow": "#0D0D0D",
+        "functionShadow": "#101010"
+      },
+      "icon": {
+        "background": "#181818",
+        "keycap": "#333333",
+        "stem": "#F5F5F5",
+        "leftLeaf": "#484848",
+        "rightLeaf": "#333333",
+        "base": "#484848",
+        "mark": "#F5F5F5",
+        "outline": "#F5F5F5"
+      }
+    },
+    {
+      "id": "shiba_apricot",
+      "name": "Apricot & Cream",
+      "keyboard": {
+        "surface": "#E8DEC8",
+        "key": "#EEE2CC",
+        "function": "#EFE4D0",
+        "ink": "#1C1B1A",
+        "hint": "#66594B",
+        "stripInk": "#1C1B1A",
+        "keyOutline": "#9E8B75",
+        "functionOutline": "#9E8B75",
+        "keyShadow": "#C9B69C",
+        "functionShadow": "#C9B69C"
+      },
+      "legacy_index": 42,
+      "icon": {
+        "background": "#E8DEC8",
+        "keycap": "#EEE2CC",
+        "stem": "#1C1B1A",
+        "leftLeaf": "#EFE4D0",
+        "rightLeaf": "#EEE2CC",
+        "base": "#EFE4D0",
+        "mark": "#1C1B1A",
+        "outline": "#1C1B1A"
+      }
+    },
+    {
+      "id": "shiba_black_tan",
+      "name": "Black & Tan",
+      "keyboard": {
+        "surface": "#1C1B1A",
+        "key": "#3E3730",
+        "function": "#37312B",
+        "ink": "#F6EFE2",
+        "hint": "#CDBCA8",
+        "stripInk": "#F6EFE2",
+        "keyOutline": "#8F7D69",
+        "functionOutline": "#8F7D69",
+        "keyShadow": "#655444",
+        "functionShadow": "#655444"
+      },
+      "legacy_index": 43,
+      "icon": {
+        "background": "#1C1B1A",
+        "keycap": "#3E3730",
+        "stem": "#F6EFE2",
+        "leftLeaf": "#37312B",
+        "rightLeaf": "#3E3730",
+        "base": "#37312B",
+        "mark": "#F6EFE2",
+        "outline": "#F6EFE2"
+      }
+    },
+    {
+      "id": "shiba_sesame",
+      "name": "Sesame Dusk",
+      "keyboard": {
+        "surface": "#302822",
+        "key": "#574536",
+        "function": "#514136",
+        "ink": "#F6EFE2",
+        "hint": "#DBC3AB",
+        "stripInk": "#F6EFE2",
+        "keyOutline": "#AA8B70",
+        "functionOutline": "#AA8B70",
+        "keyShadow": "#6A5140",
+        "functionShadow": "#6A5140"
+      },
+      "legacy_index": 44,
+      "icon": {
+        "background": "#302822",
+        "keycap": "#574536",
+        "stem": "#F6EFE2",
+        "leftLeaf": "#514136",
+        "rightLeaf": "#574536",
+        "base": "#514136",
+        "mark": "#F6EFE2",
+        "outline": "#F6EFE2"
+      }
+    }
+  ]
+}

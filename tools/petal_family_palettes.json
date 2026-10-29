@@ -1,0 +1,384 @@
+{
+  "schema": 1,
+  "status": "APPROVED",
+  "approved_on": "2026-10-16",
+  "palettes": [
+    {
+      "id": "rose",
+      "name": "Rose Porcelain",
+      "keyboard": {
+        "surface": "#8A4D63",
+        "key": "#F5F0E8",
+        "function": "#E6B4C5",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9F9C97",
+        "functionOutline": "#967580",
+        "keyShadow": "#BDB9B3",
+        "functionShadow": "#B18B98"
+      },
+      "legacy_index": 0
+    },
+    {
+      "id": "sage",
+      "name": "Sage & Linen",
+      "keyboard": {
+        "surface": "#596C5A",
+        "key": "#EEE4CF",
+        "function": "#D9C7AB",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9B9487",
+        "functionOutline": "#8D816F",
+        "keyShadow": "#B7B09F",
+        "functionShadow": "#A79984"
+      },
+      "legacy_index": 1
+    },
+    {
+      "id": "navy",
+      "name": "Harbor Jade",
+      "keyboard": {
+        "surface": "#142C47",
+        "key": "#72C9BB",
+        "function": "#D5F1CE",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#4A837A",
+        "functionOutline": "#8A9D86",
+        "keyShadow": "#589B90",
+        "functionShadow": "#A4BA9F"
+      },
+      "legacy_index": 8
+    },
+    {
+      "id": "ocean",
+      "name": "Tidepool Glass",
+      "keyboard": {
+        "surface": "#D5E7E2",
+        "key": "#3B7775",
+        "function": "#254E65",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#264D4C",
+        "functionOutline": "#183342",
+        "keyShadow": "#2D5C5A",
+        "functionShadow": "#1C3C4E"
+      },
+      "legacy_index": 4
+    },
+    {
+      "id": "blush",
+      "name": "Blush Denim",
+      "keyboard": {
+        "surface": "#3A5275",
+        "key": "#DFB1BE",
+        "function": "#C7DDEC",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#91737C",
+        "functionOutline": "#819099",
+        "keyShadow": "#AC8892",
+        "functionShadow": "#99AAB6"
+      },
+      "legacy_index": 12
+    },
+    {
+      "id": "arctic",
+      "name": "Arctic Sail",
+      "keyboard": {
+        "surface": "#244C72",
+        "key": "#B7DFF3",
+        "function": "#EEF2FA",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#77919E",
+        "functionOutline": "#9B9DA2",
+        "keyShadow": "#8DACBB",
+        "functionShadow": "#B7BAC0"
+      },
+      "legacy_index": 15
+    },
+    {
+      "id": "violet",
+      "name": "Moonlit Orchid",
+      "keyboard": {
+        "surface": "#302940",
+        "key": "#B79AD7",
+        "function": "#D7C2F2",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#77648C",
+        "functionOutline": "#8C7E9D",
+        "keyShadow": "#8D77A6",
+        "functionShadow": "#A695BA"
+      },
+      "legacy_index": 9
+    },
+    {
+      "id": "berry",
+      "name": "Berry Sorbet",
+      "keyboard": {
+        "surface": "#E8BCD7",
+        "key": "#72254F",
+        "function": "#452D62",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#4A1833",
+        "functionOutline": "#2D1D40",
+        "keyShadow": "#581C3D",
+        "functionShadow": "#35234B"
+      },
+      "legacy_index": 16
+    },
+    {
+      "id": "vermilion",
+      "name": "Vermilion Ink",
+      "keyboard": {
+        "surface": "#172C3B",
+        "key": "#F18069",
+        "function": "#F2CA82",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9D5344",
+        "functionOutline": "#9D8354",
+        "keyShadow": "#BA6351",
+        "functionShadow": "#BA9C64"
+      },
+      "legacy_index": 20
+    },
+    {
+      "id": "lemon",
+      "name": "Lemon Grove",
+      "keyboard": {
+        "surface": "#F1E7A6",
+        "key": "#346C55",
+        "function": "#31586E",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#224637",
+        "functionOutline": "#203948",
+        "keyShadow": "#285341",
+        "functionShadow": "#264455"
+      },
+      "legacy_index": 21
+    },
+    {
+      "id": "cobalt",
+      "name": "Cobalt Bloom",
+      "keyboard": {
+        "surface": "#F6BCAD",
+        "key": "#264AA0",
+        "function": "#34406E",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#193068",
+        "functionOutline": "#222A48",
+        "keyShadow": "#1D397B",
+        "functionShadow": "#283155"
+      },
+      "legacy_index": 24
+    },
+    {
+      "id": "pistachio",
+      "name": "Pistachio Plum",
+      "keyboard": {
+        "surface": "#CCD98F",
+        "key": "#612750",
+        "function": "#3B4569",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#3F1934",
+        "functionOutline": "#262D44",
+        "keyShadow": "#4B1E3E",
+        "functionShadow": "#2D3551"
+      },
+      "legacy_index": 25
+    },
+    {
+      "id": "marigold",
+      "name": "Marigold Sail",
+      "keyboard": {
+        "surface": "#183455",
+        "key": "#F1D95B",
+        "function": "#FFE9A8",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#9D8D3B",
+        "functionOutline": "#A6976D",
+        "keyShadow": "#BAA746",
+        "functionShadow": "#C4B381"
+      },
+      "legacy_index": 26
+    },
+    {
+      "id": "coral",
+      "name": "Coral Reef",
+      "keyboard": {
+        "surface": "#EEAD94",
+        "key": "#19515F",
+        "function": "#313F70",
+        "ink": "#FFF8F0",
+        "hint": "#FFF8F0",
+        "stripInk": "#211B22",
+        "keyOutline": "#10353E",
+        "functionOutline": "#202949",
+        "keyShadow": "#133E49",
+        "functionShadow": "#263156"
+      },
+      "legacy_index": 27
+    },
+    {
+      "id": "chartreuse",
+      "name": "Chartreuse Smoke",
+      "keyboard": {
+        "surface": "#354351",
+        "key": "#C5D46E",
+        "function": "#DCEAB1",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#808A48",
+        "functionOutline": "#8F9873",
+        "keyShadow": "#98A355",
+        "functionShadow": "#A9B488"
+      },
+      "legacy_index": 32
+    },
+    {
+      "id": "amethyst",
+      "name": "Amethyst Ice",
+      "keyboard": {
+        "surface": "#67428A",
+        "key": "#C4E4EF",
+        "function": "#E3D1F3",
+        "ink": "#211B22",
+        "hint": "#211B22",
+        "stripInk": "#FFF8F0",
+        "keyOutline": "#7F949B",
+        "functionOutline": "#94889E",
+        "keyShadow": "#97B0B8",
+        "functionShadow": "#AFA1BB"
+      },
+      "legacy_index": 38
+    },
+    {
+      "id": "standardlight",
+      "name": "Standard Light",
+      "legacy_index": 40,
+      "keyboard": {
+        "surface": "#E6E6E6",
+        "key": "#FFFFFF",
+        "function": "#D1D1D1",
+        "ink": "#222222",
+        "hint": "#222222",
+        "stripInk": "#222222",
+        "keyOutline": "#A3A3A3",
+        "functionOutline": "#8F8F8F",
+        "keyShadow": "#BDBDBD",
+        "functionShadow": "#AEAEAE"
+      }
+    },
+    {
+      "id": "standarddark",
+      "name": "Standard Dark",
+      "legacy_index": 41,
+      "keyboard": {
+        "surface": "#181818",
+        "key": "#333333",
+        "function": "#484848",
+        "ink": "#F5F5F5",
+        "hint": "#F5F5F5",
+        "stripInk": "#F5F5F5",
+        "keyOutline": "#6B6B6B",
+        "functionOutline": "#808080",
+        "keyShadow": "#0D0D0D",
+        "functionShadow": "#101010"
+      }
+    }
+  ],
+  "retired_id_fallbacks": {
+    "lavender": "violet",
+    "sand": "arctic",
+    "peach": "vermilion",
+    "plum": "pistachio",
+    "graphite": "navy",
+    "moonstone": "rose",
+    "forest": "sage",
+    "amber": "marigold",
+    "cocoa": "arctic",
+    "twilight": "violet",
+    "mint": "sage",
+    "terracotta": "berry",
+    "copper": "coral",
+    "mulberry": "berry",
+    "lilacspruce": "sage",
+    "jaderibbon": "rose",
+    "raspberry": "berry",
+    "skypapaya": "cobalt",
+    "saffron": "marigold",
+    "olive": "sage",
+    "flamingo": "rose",
+    "ochre": "marigold",
+    "peony": "blush",
+    "cherry": "rose"
+  },
+  "legacy_ids": [
+    "rose",
+    "sage",
+    "lavender",
+    "sand",
+    "ocean",
+    "peach",
+    "plum",
+    "graphite",
+    "navy",
+    "violet",
+    "moonstone",
+    "forest",
+    "blush",
+    "amber",
+    "cocoa",
+    "arctic",
+    "berry",
+    "twilight",
+    "mint",
+    "terracotta",
+    "vermilion",
+    "lemon",
+    "copper",
+    "mulberry",
+    "cobalt",
+    "pistachio",
+    "marigold",
+    "coral",
+    "lilacspruce",
+    "jaderibbon",
+    "raspberry",
+    "skypapaya",
+    "chartreuse",
+    "saffron",
+    "olive",
+    "flamingo",
+    "ochre",
+    "peony",
+    "amethyst",
+    "cherry",
+    "standardlight",
+    "standarddark"
+  ],
+  "sumi_key_neutral_additions": "Standard Light and Standard Dark added2026-10-24; existing16 palettes and40 saved legacy mappings unchanged. No other app modified."
+}

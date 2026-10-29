@@ -1,0 +1,26 @@
+Sumi preview contains modified OpenBoard code from:
+https://github.com/openboard-team/openboard
+Revision c3772cd56e770975ea5570db903f93b199de8b32
+
+The OpenBoard aggregate is licensed under GNU GPL v3. The full license is in
+LICENSE. Original copyright and license headers remain in the source files.
+Many inherited Android Open Source Project files are under Apache License 2.0;
+its full text is in LICENSE-Apache-2.0.txt. Preserve all applicable notices and
+provide corresponding source with binary redistribution as required by licenses.
+
+The bundled main_en.dict and corresponding en_wordlist.combined.gz were taken
+from that same upstream revision; the latter is supplied in dictionaries/.
+The dictionary header identifies English (US). No proprietary gesture libraries
+or externally sourced prebuilt keyboard native libraries are included. All IME
+native libraries are built from the included C++ source using the Android NDK.
+
+Runtime dependencies are AndroidX Core, Collection, RecyclerView and their
+transitive dependencies, plus Kotlin standard libraries. Their published license
+notices are retained in dependency artifacts/APK metadata. AndroidX and Kotlin
+are open-source platform libraries, not cloud or analytics SDKs. JSR-305 is a
+compile-only annotation dependency and is not shipped as a runtime library.
+JUnit and AndroidX Test are development-only test dependencies.
+
+Sumi vector icons and the two bundled Bloom/Wave GIF animations were created
+for this project. They are new interpretations of the supplied design direction,
+not recovered production assets. Preview sheets are supplied beside this project.

@@ -1,0 +1,5 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="32dp" android:height="32dp" android:viewportWidth="32" android:viewportHeight="32">
+    <!-- Theme tint is supplied by the suggestion strip. Three rounded sound bars. -->
+    <path android:fillColor="#00000000" android:strokeColor="#FFFFFFFF" android:strokeWidth="2" android:strokeLineJoin="round" android:pathData="M8,4 L24,4 Q29,4 29,9 L29,20 Q29,25 24,25 L12,25 L6,29 L6,25 Q3,24 3,20 L3,9 Q3,4 8,4 Z"/>
+    <path android:fillColor="#00000000" android:strokeColor="#FFFFFFFF" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M10,13 L10,18 M16,10 L16,20 M22,12 L22,18"/>
+</vector>

@@ -1,0 +1,9 @@
+<resources>
+<string name="petal_tools_editing">Editing panel</string>
+<string name="petal_cursor_left">Cursor left</string><string name="petal_cursor_right">Cursor right</string>
+<string name="petal_cursor_up">Cursor up</string><string name="petal_cursor_down">Cursor down</string>
+<string name="petal_word_left">Previous word</string><string name="petal_word_right">Next word</string>
+<string name="petal_select_left">Select left</string><string name="petal_select_right">Select right</string>
+<string name="petal_line_start">Line start</string><string name="petal_line_end">Line end</string>
+<string name="petal_cut">Cut</string>
+</resources>

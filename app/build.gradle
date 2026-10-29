@@ -1,0 +1,58 @@
+plugins { id 'com.android.application' }
+def petalSigningPath = providers.environmentVariable('PETAL_SIGNING_CONFIG').orNull
+def petalSigning = petalSigningPath ? new groovy.json.JsonSlurper().parse(file(petalSigningPath)) : null
+android {
+    namespace = 'dev.fourwags.sumi'
+    testNamespace = 'dev.fourwags.sumi.inputmethod.latin.test'
+    compileSdk = 37
+    buildToolsVersion = '37.0.0'
+    ndkVersion = '30.0.16248370'
+    defaultConfig {
+        applicationId 'dev.fourwags.sumi.inputmethod.latin'
+        minSdk = 29
+        targetSdk = 37
+        versionCode = 3
+        versionName = '0.1.2-preview'
+        testInstrumentationRunner = 'dev.fourwags.sumi.inputmethod.latin.PetalTestRunner'
+        ndk { abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64' }
+        externalNativeBuild { cmake { arguments '-DANDROID_STL=c++_static', '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON', '-DCMAKE_CXX_FLAGS_DEBUG=-g -O0', '-DCMAKE_CXX_FLAGS_RELEASE=-O2 -DNDEBUG' } }
+    }
+    buildFeatures { buildConfig = true }
+    bundle { language { enableSplit = false } }
+    compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
+    signingConfigs {
+        if (petalSigning) {
+            petalRelease {
+                storeFile = file(petalSigning.storeFile)
+                storePassword = petalSigning.storePassword
+                keyAlias = petalSigning.keyAlias
+                keyPassword = petalSigning.keyPassword
+                enableV3Signing = true
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled = false
+            debuggable = false
+            if (petalSigning) signingConfig = signingConfigs.petalRelease
+        }
+    }
+    testBuildType = providers.gradleProperty('petalTestBuildType').getOrElse('debug')
+    externalNativeBuild { cmake { path file('src/main/jni/CMakeLists.txt'); version '4.1.2' } }
+    androidResources { noCompress += ['dict'] }
+    lint { abortOnError = true }
+}
+dependencies {
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    implementation 'androidx.core:core:1.19.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.7.0'
+    androidTestImplementation 'androidx.test:rules:1.7.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.1.1'
+    androidTestImplementation 'com.google.guava:guava:33.7.2-android'
+}
+
+dependencies { implementation 'androidx.collection:collection:1.7.0' }

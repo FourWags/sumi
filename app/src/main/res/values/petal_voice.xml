@@ -1,0 +1,18 @@
+<resources>
+<string name="petal_voice_start">Voice typing</string>
+<string name="petal_voice_permission_info">Sumi uses your microphone when you tap its speech-bubble button to start voice typing. Tap again to stop, or choose Cancel to discard. Dictation stops after the pause length you choose in Settings (2 seconds by default), or after one minute. Recognized phrases stay in memory until dictation finishes. English (US) speech recognition stays on this device. Sumi does not save audio or transcripts, use cloud recognition, or download voice models. After granting permission, return to your keyboard and tap the speech bubble to begin.</string>
+<string name="petal_voice_permission_button">Microphone permission</string>
+<string name="petal_voice_granted">Microphone allowed. Tap the keyboard speech bubble to start voice typing; tap again to stop.</string>
+<string name="petal_voice_denied">Microphone access was not granted. Typing still works.</string>
+<string name="petal_voice_unavailable">Offline English voice typing needs Android 12 or newer and an installed on-device recognizer. There is no cloud fallback or automatic download.</string>
+<string name="petal_voice_settings">Voice typing: tap the speech bubble beside suggestions to start; tap again to stop sooner. Choose how long a pause ends dictation below. Speech stays on-device; permission is requested only when you choose to allow it. Available offline English support depends on your device.</string>
+<string name="petal_voice_connecting">Connecting to offline voice…</string>
+<string name="petal_voice_speech">Speech detected — English (US)</string>
+<string name="petal_voice_listening">Listening — English (US)</string>
+<string name="petal_voice_resuming">Resuming offline voice… Stops after your selected pause.</string>
+<string name="petal_voice_limit">Voice typing reached its text limit. Please try a shorter session.</string>
+<string name="petal_voice_finishing">Finishing…</string>
+<string name="petal_voice_stop">Stop</string>
+<string name="petal_voice_timeout">Voice typing stopped after one minute.</string>
+<string name="petal_voice_failed">Offline English voice typing could not finish. Check microphone permission and installed offline English support, then try again.</string>
+</resources>

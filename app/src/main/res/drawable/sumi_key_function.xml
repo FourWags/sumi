@@ -1,0 +1,4 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item><shape android:shape="rectangle"><solid android:color="?attr/petalFunctionShadow"/><corners android:radius="8dp"/></shape></item>
+<item android:bottom="1dp"><shape android:shape="rectangle"><solid android:color="?attr/petalFunction"/><stroke android:width="0.65dp" android:color="?attr/petalFunctionOutline"/><corners android:radius="8dp"/></shape></item>
+</layer-list>

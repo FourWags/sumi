@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="petal_exit_one_handed">Exit one-handed mode</string>
+    <string name="petal_switch_one_handed">Switch one-handed side</string>
+    <string name="petal_clipboard">Clipboard</string>
+    <string name="petal_pinned_clipboard">Pinned clipboard entry</string>
+    <string name="petal_clear_clipboard">Clear clipboard history</string>
+    <string name="petal_revert_label">↶ Revert: %1$s</string>
+    <string name="petal_revert_description">Revert correction to %1$s</string>
+    <string name="petal_media_description">Emoji and offline GIFs</string>
+    <string name="petal_insert_gif_description">Insert %1$s GIF</string>
+    <string name="petal_close_media">Close media panel</string>
+    <string name="petal_emoji_smileys_emotion">Smileys and emotion</string>
+    <string name="petal_emoji_people_body">People and body</string>
+    <string name="petal_emoji_categories">Emoji categories</string>
+</resources>

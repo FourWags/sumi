@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- KeyCodeDescriptionMapper constructs spoken_symbol/emoji/emoticon resource names at runtime.
+     Retain these accessibility labels even when a future release enables resource shrinking. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@string/spoken_*" />

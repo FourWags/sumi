@@ -1,0 +1,11 @@
+<input-method xmlns:android="http://schemas.android.com/apk/res/android" android:settingsActivity="dev.fourwags.sumi.inputmethod.latin.PetalSettingsActivity" android:supportsSwitchingToNextInputMethod="true">
+<subtype android:icon="@drawable/ic_ime_switcher_dark"
+            android:label="@string/subtype_en_US"
+            android:subtypeId="0xc9194f98"
+            android:imeSubtypeLocale="en_US"
+            android:languageTag="en-US"
+            android:imeSubtypeMode="keyboard"
+            android:imeSubtypeExtraValue="TrySuppressingImeSwitcher,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable"
+            android:isAsciiCapable="true"
+    />
+</input-method>

@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dev.fourwags.sumi.rollback">
+  <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="37"/>
+  <application android:label="Sumi rollback test helper" android:allowBackup="false" android:debuggable="true" android:usesCleartextTraffic="false"/>
+  <instrumentation android:name="dev.fourwags.sumi.rollback.RollbackInstrumentation" android:targetPackage="dev.fourwags.sumi.inputmethod.latin" android:functionalTest="true"/>
+</manifest>
