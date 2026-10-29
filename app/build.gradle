@@ -11,8 +11,8 @@ android {
         applicationId 'dev.fourwags.sumi.inputmethod.latin'
         minSdk = 29
         targetSdk = 37
-        versionCode = 3
-        versionName = '0.1.2-preview'
+        versionCode = 4
+        versionName = '0.1.3-preview'
         testInstrumentationRunner = 'dev.fourwags.sumi.inputmethod.latin.PetalTestRunner'
         ndk { abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64' }
         externalNativeBuild { cmake { arguments '-DANDROID_STL=c++_static', '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON', '-DCMAKE_CXX_FLAGS_DEBUG=-g -O0', '-DCMAKE_CXX_FLAGS_RELEASE=-O2 -DNDEBUG' } }
