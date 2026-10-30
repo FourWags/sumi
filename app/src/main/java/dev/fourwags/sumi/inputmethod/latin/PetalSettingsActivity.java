@@ -24,7 +24,14 @@ public class PetalSettingsActivity extends Activity {
     private TextView keyboardStatus;
     private Spinner themeSelector, layoutSelector;
     private PetalThemePreview themePreview;
-    private static final int INK=0xff211b22, ACCENT=0xff724151, PAPER=0xfffffaf2;
+    private int INK=0xff30262c, ACCENT=0xff724151, PAPER=0xfffffaf4;
+    private final java.util.Map<android.view.View,String> settingsSections=new java.util.LinkedHashMap<>();
+    private final java.util.Map<String,ImageButton> navigation=new java.util.LinkedHashMap<>();
+    private ScrollView settingsScroll;
+    private TextView pageHeading;
+    private ImageView companion;
+    private String activePage="appearance";
+    private static final String PAGE_STATE="sumi_settings_page";
     public static final String THEME_SELECTOR = "petal_theme_selector";
     public static final String LAYOUT_SELECTOR = "petal_layout_selector";
     private static final String[] LAYOUTS = {"Large keys", "Standard QWERTY"};
@@ -38,16 +45,32 @@ public class PetalSettingsActivity extends Activity {
         prefs = DeviceProtectedUtils.getSharedPreferences(this);
         PetalThemeCatalog.ensureSelection(this);
         FourWagsKeyIcon.initialize(this);
-        LinearLayout box = new LinearLayout(this); box.setOrientation(LinearLayout.VERTICAL); box.setPadding(dp(20),dp(24),dp(20),dp(20));
-        box.setBackgroundColor(0xfff2eeeb);
-        ScrollView scroll = new ScrollView(this); scroll.addView(box); setContentView(scroll);
-        final LinearLayout insetRoot=box;
-        scroll.setOnApplyWindowInsetsListener((v,insets)->{
-            int top=insets.getSystemWindowInsetTop(), bottom=insets.getSystemWindowInsetBottom();
-            insetRoot.setPadding(dp(20),top+dp(20),dp(20),bottom+dp(20));return insets;
-        });
-        TextView title = new TextView(this); title.setText("Sumi"); title.setTextColor(INK); title.setTextSize(32); title.setTypeface(PetalFonts.heading(this)); title.setAccessibilityHeading(true); box.addView(title);
-        TextView intro = new TextView(this); intro.setText(R.string.petal_settings_intro); intro.setTextColor(ACCENT); intro.setTextSize(14); intro.setPadding(0,dp(6),0,dp(8)); box.addView(intro);
+        boolean dark=(getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK)==android.content.res.Configuration.UI_MODE_NIGHT_YES;
+        if(dark){INK=0xfff5e9e2;ACCENT=0xffdca9b6;PAPER=0xff2e292d;}
+        int surface=dark?0xff211e20:0xfff5f0e9;
+        LinearLayout shell=new LinearLayout(this);shell.setOrientation(LinearLayout.HORIZONTAL);shell.setBackgroundColor(surface);
+        setContentView(shell);
+        shell.setOnApplyWindowInsetsListener((v,insets)->{shell.setPadding(insets.getSystemWindowInsetLeft(),insets.getSystemWindowInsetTop(),insets.getSystemWindowInsetRight(),insets.getSystemWindowInsetBottom());return insets;});
+        ScrollView railScroll=new ScrollView(this);railScroll.setFillViewport(true);railScroll.setBackgroundColor(0xff29242a);
+        shell.addView(railScroll,new LinearLayout.LayoutParams(dp(64),-1));
+        LinearLayout rail=new LinearLayout(this);rail.setOrientation(LinearLayout.VERTICAL);rail.setGravity(android.view.Gravity.CENTER_HORIZONTAL);rail.setPadding(dp(7),dp(12),dp(7),dp(12));railScroll.addView(rail);
+        companion=new ImageView(this);companion.setImageResource(PetalButtonIcon.drawable(PetalButtonIcon.selected(prefs)));companion.setImportantForAccessibility(android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        LinearLayout.LayoutParams dogParams=new LinearLayout.LayoutParams(dp(34),dp(42));dogParams.bottomMargin=dp(16);rail.addView(companion,dogParams);
+        String[] pages={"setup","appearance","typing","voice","privacy","about"};
+        String[] labels={"Setup","Appearance","Typing","Voice","Privacy","About"};
+        int[] icons={R.drawable.sumi_nav_setup,R.drawable.sumi_nav_palette,R.drawable.sumi_nav_keyboard,R.drawable.sumi_nav_voice,R.drawable.sumi_nav_privacy,R.drawable.sumi_nav_about};
+        for(int i=0;i<pages.length;i++){
+            final String page=pages[i];ImageButton nav=new ImageButton(this);nav.setTag("sumi_nav_"+page);nav.setContentDescription(labels[i]+" settings");nav.setTooltipText(labels[i]);nav.setImageResource(icons[i]);nav.setPadding(dp(13),dp(13),dp(13),dp(13));nav.setMinimumWidth(dp(50));nav.setMinimumHeight(dp(50));nav.setScaleType(ImageView.ScaleType.FIT_CENTER);nav.setOnClickListener(v->showPage(page,true));
+            LinearLayout.LayoutParams navParams=new LinearLayout.LayoutParams(dp(50),dp(50));navParams.bottomMargin=dp(8);rail.addView(nav,navParams);navigation.put(page,nav);
+        }
+        LinearLayout content=new LinearLayout(this);content.setOrientation(LinearLayout.VERTICAL);shell.addView(content,new LinearLayout.LayoutParams(0,-1,1));
+        LinearLayout header=new LinearLayout(this);header.setOrientation(LinearLayout.VERTICAL);header.setPadding(dp(18),dp(14),dp(18),dp(14));content.addView(header);
+        TextView owner=new TextView(this);owner.setText("FOUR WAGS");owner.setTextColor(dark?0xffc6b5bf:0xff74626b);owner.setTextSize(10);owner.setLetterSpacing(.16f);owner.setImportantForAccessibility(android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO);header.addView(owner);
+        TextView title=new TextView(this);title.setText("Sumi");title.setTextColor(INK);title.setTextSize(20);title.setTypeface(PetalFonts.sans(this,500));header.addView(title);
+        android.view.View divider=new android.view.View(this);divider.setBackgroundColor(dark?0xff52444d:0xffded2d3);content.addView(divider,new LinearLayout.LayoutParams(-1,dp(1)));
+        settingsScroll=new ScrollView(this);settingsScroll.setTag("sumi_settings_scroll");settingsScroll.setFillViewport(true);content.addView(settingsScroll,new LinearLayout.LayoutParams(-1,0,1));
+        LinearLayout box=new LinearLayout(this);box.setOrientation(LinearLayout.VERTICAL);box.setPadding(dp(16),dp(16),dp(16),dp(24));settingsScroll.addView(box);
+        pageHeading=new TextView(this);pageHeading.setTextSize(27);pageHeading.setTextColor(INK);pageHeading.setTypeface(PetalFonts.sans(this,500));pageHeading.setAccessibilityHeading(true);box.addView(pageHeading);
         LinearLayout root=box;
         box=section(root,"Get started","Use Sumi in your existing apps, including Google Messages.");
         enableKeyboard = button(box,"Enable keyboard", () -> startActivity(new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)));
@@ -60,7 +83,7 @@ public class PetalSettingsActivity extends Activity {
         dogSelector.setSelection(PetalButtonIcon.selected(prefs));
         dogSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
-                if (position != PetalButtonIcon.selected(prefs)) PetalButtonIcon.select(prefs, position);
+                if (position != PetalButtonIcon.selected(prefs)) PetalButtonIcon.select(prefs, position); companion.setImageResource(PetalButtonIcon.drawable(position));
             }
             @Override public void onNothingSelected(AdapterView<?> parent) { }
         });
@@ -124,8 +147,27 @@ public class PetalSettingsActivity extends Activity {
         button(box,"GNU GPL v3",()->showLegalNotice("LICENSE","GNU GPL v3"));
         button(box,"Apache License 2.0",()->showLegalNotice("LICENSE-Apache-2.0.txt","Apache License 2.0"));
         button(box,"Bundled font licenses",()->showLegalNotice("FONT_NOTICES.txt","Bundled font licenses"));
+        String initial=state==null?null:state.getString(PAGE_STATE);
+        if(initial==null){boolean enabled=false;for(android.view.inputmethod.InputMethodInfo info:((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).getEnabledInputMethodList())if(getPackageName().equals(info.getPackageName()))enabled=true;initial=enabled?"appearance":"setup";}
+        showPage(initial,false);
         if(FourWagsKeyIcon.pending(this)) showIconPicker();
     }
+    /** Navigation changes visibility only; it never writes keyboard preferences. */
+    void showPage(String page,boolean announce) {
+        if(!navigation.containsKey(page))page="appearance";
+        activePage=page;
+        for(java.util.Map.Entry<android.view.View,String> item:settingsSections.entrySet())item.getKey().setVisibility(page.equals(item.getValue())?android.view.View.VISIBLE:android.view.View.GONE);
+        for(java.util.Map.Entry<String,ImageButton> item:navigation.entrySet()){
+            boolean selected=page.equals(item.getKey());ImageButton button=item.getValue();button.setSelected(selected);
+            android.graphics.drawable.GradientDrawable background=new android.graphics.drawable.GradientDrawable();background.setColor(selected?0xffdca9b6:0x0029242a);background.setCornerRadius(dp(13));
+            android.content.res.ColorStateList ripple=android.content.res.ColorStateList.valueOf(0x447b6572);button.setBackground(new android.graphics.drawable.RippleDrawable(ripple,background,null));
+            button.setImageTintList(android.content.res.ColorStateList.valueOf(selected?0xff30212a:0xfff5e9e2));
+        }
+        String title="setup".equals(page)?"Get started":"appearance".equals(page)?"Appearance":"typing".equals(page)?"Typing":"voice".equals(page)?"Voice":"privacy".equals(page)?"Privacy":"About Sumi";
+        pageHeading.setText(title);settingsScroll.scrollTo(0,0);
+        if(announce)pageHeading.announceForAccessibility(title);
+    }
+    @Override protected void onSaveInstanceState(Bundle state){state.putString(PAGE_STATE,activePage);super.onSaveInstanceState(state);}
     private void showLegalNotice(String filename,String title) {
         try (java.io.InputStream in=getAssets().open("licenses/"+filename);
              java.io.ByteArrayOutputStream out=new java.io.ByteArrayOutputStream()) {
@@ -141,9 +183,11 @@ public class PetalSettingsActivity extends Activity {
     }
     private LinearLayout section(LinearLayout root,String title,String description) {
         LinearLayout card=new LinearLayout(this);card.setOrientation(LinearLayout.VERTICAL);card.setPadding(dp(16),dp(16),dp(16),dp(16));
-        android.graphics.drawable.GradientDrawable bg=new android.graphics.drawable.GradientDrawable();bg.setColor(PAPER);bg.setCornerRadius(dp(16));bg.setStroke(dp(1),0xffe2d8d8);card.setBackground(bg);
+        android.graphics.drawable.GradientDrawable bg=new android.graphics.drawable.GradientDrawable();bg.setColor(PAPER);bg.setCornerRadius(dp(16));bg.setStroke(dp(1),INK==0xff30262c?0xffded2d3:0xff52444d);card.setBackground(bg);
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.topMargin=dp(12);root.addView(card,lp);
         TextView heading=new TextView(this);heading.setText(title);heading.setTextSize(19);heading.setTextColor(INK);heading.setTypeface(PetalFonts.sans(this,500));heading.setAccessibilityHeading(true);card.addView(heading);
+        String group=title.equals("Get started")?"setup":title.equals("Appearance & size")?"appearance":title.equals("Typing")||title.equals("Personal media")?"typing":title.equals("Voice typing")?"voice":title.equals("Privacy & dictionary")?"privacy":"about";
+        settingsSections.put(card,group);
         note(card,description);return card;
     }
     private TextView note(LinearLayout parent,String text){TextView view=new TextView(this);view.setText(text);view.setTextColor(INK);view.setTextSize(14);view.setTypeface(PetalFonts.sans(this,400));view.setLineSpacing(dp(2),1);view.setPadding(0,dp(6),0,dp(10));parent.addView(view);return view;}
@@ -206,7 +250,7 @@ public class PetalSettingsActivity extends Activity {
                     row.addView(icon, new LinearLayout.LayoutParams(dp(40), dp(40)));
                 }
                 TextView text = new TextView(PetalSettingsActivity.this);
-                text.setTextColor(0xff211b22);
+                text.setTextColor(INK);
                 text.setTextSize(16);
                 text.setPadding(dp(8), 0, 0, 0);
                 text.setText(expanded ? names[position] + (descriptions == null ? "" : "\n" + descriptions[position])
@@ -226,12 +270,18 @@ public class PetalSettingsActivity extends Activity {
         return spinner;
     }
     private void option(LinearLayout box,String title,String key,String[] labels,int[] values,int fallback) {
-        TextView label=note(box,title);Spinner spinner=new Spinner(this);spinner.setTag(key);spinner.setContentDescription(title);spinner.setMinimumHeight(dp(48));
-        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels));
+        TextView label=note(box,title);Spinner spinner=new Spinner(this);spinner.setId(android.view.View.generateViewId());label.setLabelFor(spinner.getId());label.setImportantForAccessibility(android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO);spinner.setTag(key);spinner.setContentDescription(title);spinner.setMinimumHeight(dp(48));
+        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels) {
+            private android.view.View choice(int index) {
+                TextView text=new TextView(PetalSettingsActivity.this);text.setText(labels[index]);text.setTextSize(16);text.setTextColor(INK);text.setTypeface(PetalFonts.sans(PetalSettingsActivity.this,400));text.setBackgroundColor(PAPER);text.setSingleLine(false);text.setMinHeight(dp(48));text.setGravity(android.view.Gravity.CENTER_VERTICAL);text.setPadding(dp(8),dp(8),dp(8),dp(8));text.setLayoutParams(new android.view.ViewGroup.LayoutParams(-1,-2));return text;
+            }
+            @Override public android.view.View getView(int index,android.view.View old,android.view.ViewGroup parent){return choice(index);}
+            @Override public android.view.View getDropDownView(int index,android.view.View old,android.view.ViewGroup parent){return choice(index);}
+        });
         int stored=prefs.getInt(key,fallback),position=0;for(int n=0;n<values.length;n++)if(stored==values[n])position=n;
-        spinner.setSelection(position);box.addView(spinner,new LinearLayout.LayoutParams(-1,-2));
+        spinner.setSelection(position);spinner.setContentDescription(title+": "+labels[position]);box.addView(spinner,new LinearLayout.LayoutParams(-1,-2));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            public void onItemSelected(AdapterView<?> p,android.view.View v,int index,long id){if(prefs.getInt(key,fallback)!=values[index])prefs.edit().putInt(key,values[index]).apply();}
+            public void onItemSelected(AdapterView<?> p,android.view.View v,int index,long id){spinner.setContentDescription(title+": "+labels[index]);if(prefs.getInt(key,fallback)!=values[index])prefs.edit().putInt(key,values[index]).apply();}
             public void onNothingSelected(AdapterView<?> p){}
         });
     }
@@ -240,7 +290,7 @@ public class PetalSettingsActivity extends Activity {
         control.setOnCheckedChangeListener((v,checked)->prefs.edit().putBoolean(key,checked).apply());box.addView(control);
     }
     private Button button(LinearLayout box,String title,Runnable action) {
-        Button b=new Button(this);b.setText(title);b.setTextSize(15);b.setTypeface(PetalFonts.sans(this,500));b.setAllCaps(false);b.setTextColor(INK);b.setMinHeight(dp(52));b.setBackground(PetalUi.control(this,0xfff1e5e8,0xffd8c4ca,ACCENT));b.setElevation(0);b.setStateListAnimator(null);b.setOnClickListener(v->action.run());box.addView(b);return b;
+        Button b=new Button(this);b.setText(title);b.setTextSize(15);b.setTypeface(PetalFonts.sans(this,500));b.setAllCaps(false);b.setTextColor(INK);b.setMinHeight(dp(52));b.setBackground(PetalUi.control(this,INK==0xff30262c?0xfff1e5e8:0xff493b45,INK==0xff30262c?0xffd8c4ca:0xff77616f,ACCENT));b.setElevation(0);b.setStateListAnimator(null);b.setOnClickListener(v->action.run());box.addView(b);return b;
     }
     private void showIconPicker() {
         LinearLayout choices=new LinearLayout(this);choices.setOrientation(LinearLayout.VERTICAL);

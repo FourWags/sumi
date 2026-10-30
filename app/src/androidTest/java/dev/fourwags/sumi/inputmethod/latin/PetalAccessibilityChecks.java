@@ -26,6 +26,10 @@ final class PetalAccessibilityChecks {
             for(AccessibilityHierarchyCheckResult result:check.runCheckOnHierarchy(hierarchy)) {
                 if(result.getType()!=AccessibilityCheckResult.AccessibilityCheckResultType.NOT_RUN) {
                     String line=result.getType()+" "+check.getClass().getSimpleName()+": "+result.getMessage(Locale.US);
+                    if(label.startsWith("rail-") && result.getElement()!=null) {
+                        com.google.android.apps.common.testing.accessibility.framework.uielement.ViewHierarchyElement element=result.getElement();
+                        line+=" [class="+element.getClassName()+", text="+element.getText()+", bounds="+element.getBoundsInScreen()+", layout="+element.getLayoutParams()+"]";
+                    }
                     report.append(line).append("\n");
                     boolean known=qwerty&&knownQwertyTarget(check,result);
                     if(known) report.append("KNOWN_QWERTY_TOUCH_TARGET_LIMIT: virtual key ").append(result.getElement().getId()).append("; raw finding retained above.\n");

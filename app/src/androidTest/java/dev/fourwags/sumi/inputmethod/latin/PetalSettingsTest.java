@@ -22,7 +22,9 @@ public class PetalSettingsTest {
             for(String id:new String[]{"a","b","c"}){ComponentName c=new ComponentName(a,a.getPackageName()+".FourWagsIcon_"+id);savedComponents.put(c,a.getPackageManager().getComponentEnabledSetting(c));}
             for(View root:android.view.inspector.WindowInspector.getGlobalWindowViews()){View later=find(root,"Later");if(later!=null)later.performClick();}
             FourWagsKeyIcon.skip(a);
+            a.showPage("appearance",false);
         });
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
     }
     @After public void restoreState() {
         if(savedPreferences==null)return;
@@ -172,6 +174,21 @@ public class PetalSettingsTest {
             assertEquals(15,selector.getSelectedItemPosition());
         } finally {InstrumentationRegistry.getInstrumentation().runOnMainSync(()->{PetalSettingsActivity.selectTheme(activity,before);activity.onResume();});}
     }
+    @Test public void railNavigationPreservesPreferencesAndExposesEveryPage() {
+        PetalSettingsActivity a=rule.getActivity();
+        android.content.SharedPreferences p=dev.fourwags.sumi.inputmethod.latin.utils.DeviceProtectedUtils.getSharedPreferences(a);
+        java.util.Map<String,?> before=new java.util.HashMap<>(p.getAll());
+        for(String page:new String[]{"setup","appearance","typing","voice","privacy","about"}) {
+            android.view.View button=a.getWindow().getDecorView().findViewWithTag("sumi_nav_"+page);
+            assertNotNull(button);
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(button::performClick);
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+            assertTrue(button.isSelected());
+            assertTrue(button.getWidth()>=Math.round(48*a.getResources().getDisplayMetrics().density));
+            assertEquals(before,p.getAll());
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(()->PetalAccessibilityChecks.check(a.getWindow().getDecorView(),"rail-"+page));
+        }
+    }
     @Test public void settingsAccessibilityFramework() {
         InstrumentationRegistry.getInstrumentation().runOnMainSync(()->PetalAccessibilityChecks.check(rule.getActivity().getWindow().getDecorView(),"settings"));
     }
@@ -183,7 +200,7 @@ public class PetalSettingsTest {
             InstrumentationRegistry.getInstrumentation().runOnMainSync(()->{
                 assertEquals(2f,activity.getResources().getConfiguration().fontScale,0.01f);
                 android.view.View root=activity.getWindow().getDecorView();
-                android.widget.ScrollView scroll=(android.widget.ScrollView)((android.view.ViewGroup)root.findViewById(android.R.id.content)).getChildAt(0);
+                android.widget.ScrollView scroll=root.findViewWithTag("sumi_settings_scroll");
                 assertTrue(scroll.getChildAt(0).getHeight()>scroll.getHeight());
                 scroll.scrollTo(0,scroll.getChildAt(0).getHeight());
                 assertNotNull(root.findViewWithTag(PetalSettingsActivity.THEME_SELECTOR));
@@ -249,7 +266,13 @@ public class PetalSettingsTest {
         assertNotNull(silence);assertNotNull(size);
         for(int index=0;index<3;index++) {
             final int n=index;
-            InstrumentationRegistry.getInstrumentation().runOnMainSync(()->{silence.setSelection(n);size.setSelection(n);});
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(()->a.showPage("voice",false));
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(()->silence.setSelection(n));
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(()->a.showPage("typing",false));
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(()->size.setSelection(n));
             InstrumentationRegistry.getInstrumentation().waitForIdleSync();
             assertEquals(new int[]{2000,4000,8000}[n],p.getInt(PetalVoiceTiming.SILENCE,2000));
             assertEquals(new int[]{100,125,150}[n],p.getInt(PetalTypingOptions.SUGGESTION_SIZE,125));
