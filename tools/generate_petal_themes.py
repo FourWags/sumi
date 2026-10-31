@@ -5,7 +5,11 @@ import argparse,json,re,xml.etree.ElementTree as ET
 p=Path(__file__).resolve().parents[1];res=p/'app/src/main/res';data=json.loads((p/'tools/petal_wake_palettes.json').read_text());check=argparse.ArgumentParser();check.add_argument('--check',action='store_true');args=check.parse_args()
 xml=(res/'values/petal_themes.xml').read_text();start=xml.index('<style name="PetalTheme.Rose"');end=xml.index('<style name="SumiKeyboardView"');styles=[]
 for r in data['palettes']:
- styles.append('<style name="PetalTheme.'+r['id'].title()+'" parent="PetalTheme">'+''.join('<item name="'+('sumi' if k.startswith('key') else 'petal')+k[0].upper()+k[1:]+'">'+v+'</item>' for k,v in r['keyboard'].items())+'</style>')
+ # Keep the transient preview dark in every theme, including neutral light,
+ # while retaining a subtle tint from the selected keyboard surface.
+ rgb=[int(r['keyboard']['surface'][i:i+2],16) for i in (1,3,5)]
+ preview='#'+''.join(f'{round(.25*c+.75*base):02X}' for c,base in zip(rgb,(33,30,32)))
+ styles.append('<style name="PetalTheme.'+r['id'].title()+'" parent="PetalTheme">'+''.join('<item name="'+('sumi' if k.startswith('key') else 'petal')+k[0].upper()+k[1:]+'">'+v+'</item>' for k,v in r['keyboard'].items())+'<item name="sumiPreviewSurface">'+preview+'</item><item name="sumiPreviewInk">#FFF8EE</item></style>')
 outputs={res/'values/petal_themes.xml':xml[:start]+'\n'.join(styles)+'\n'+xml[end:]}
 family=json.loads((p/'tools/petal_family_palettes.json').read_text()); byid={r['id']:r for r in data['palettes']}
 sumi_ns='{http://schemas.android.com/apk/res/android}'

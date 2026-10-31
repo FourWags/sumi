@@ -59,3 +59,16 @@ app=manifest.find('application');assert app.get(ns+'icon')=='@mipmap/fw_sumi_c' 
 assert not any(a.get(ns+'enabled')=='true' for a in aliases)
 assert any(a.get(ns+'name')=='${applicationId}.FourWagsIcon_c' and a.get(ns+'enabled')=='true' for a in all_aliases)
 print('PASS: Sumi application/round icon and fresh-install launcher use approved Sumi artwork.')
+
+# Preview foreground/background are paired independently of keycap ink.
+preview_ratios=[]
+for row in rows:
+ style=styles['PetalTheme.'+row['id'].title()]
+ surface,ink=style['sumiPreviewSurface'],style['sumiPreviewInk']
+ assert luminance(surface)<=.12, (row['name'],surface)
+ preview_ratios.append(contrast(ink,surface))
+assert min(preview_ratios)>=7
+for name in ['SumiKeyboardView','PetalMainKeyboardView']:
+ assert styles[name]['keyPreviewTextColor']=='?attr/sumiPreviewInk'
+ assert styles[name]['keyPreviewBackground']=='@drawable/sumi_key_preview'
+print(f'PASS: all 21 dark popup/ivory letter pairs; minimum contrast {min(preview_ratios):.2f}:1.')

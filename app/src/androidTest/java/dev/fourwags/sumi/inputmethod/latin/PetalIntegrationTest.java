@@ -169,6 +169,37 @@ public class PetalIntegrationTest {
         }
         return null;
     }
+    @Test public void testPopupLetterContrastAcrossAllThemesAndBothLayouts() throws Exception {
+        android.content.SharedPreferences prefs=DeviceProtectedUtils.getSharedPreferences(activity);
+        Object oldTheme=prefs.getAll().get("petal_theme");
+        try {
+            field(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE,0,null);
+            for(boolean large:new boolean[]{false,true})for(int theme=0;theme<PetalThemeCatalog.IDS.length;theme++) {
+                final int index=theme;
+                InstrumentationRegistry.getInstrumentation().runOnMainSync(()->prefs.edit().putInt("petal_theme",PetalThemeCatalog.LEGACY_INDICES[index]).putBoolean("petal_large_keys",large).putBoolean("petal_literal",true).putBoolean("popup_on",true).apply());
+                SystemClock.sleep(250);
+                MainKeyboardView view=KeyboardSwitcher.getInstance().getMainKeyboardView();Key key=view.getKeyboard().getKey('e');
+                long down=SystemClock.uptimeMillis();popupTouch(view,down,0,key.getX()+key.getWidth()/2f,key.getY()+key.getHeight()/2f);SystemClock.sleep(80);
+                try { InstrumentationRegistry.getInstrumentation().runOnMainSync(()->{
+                    android.widget.TextView preview=(android.widget.TextView)visiblePreview(ime.getWindow().getWindow().getDecorView());assertNotNull("Popup visible in theme "+index,preview);
+                    assertEquals("e",preview.getText().toString().toLowerCase(java.util.Locale.US));
+                    android.graphics.Bitmap background=android.graphics.Bitmap.createBitmap(preview.getWidth(),preview.getHeight(),android.graphics.Bitmap.Config.ARGB_8888);
+                    android.graphics.Bitmap rendered=android.graphics.Bitmap.createBitmap(preview.getWidth(),preview.getHeight(),android.graphics.Bitmap.Config.ARGB_8888);
+                    try {
+                        preview.getBackground().setBounds(0,0,preview.getWidth(),preview.getHeight());
+                        preview.getBackground().draw(new android.graphics.Canvas(background));
+                        int surface=background.getPixel(background.getWidth()/2,background.getHeight()/2),ink=preview.getCurrentTextColor();
+                        assertTrue("Popup background must be subdued",androidx.core.graphics.ColorUtils.calculateLuminance(surface)<=.12);
+                        assertTrue("Popup letter contrast",androidx.core.graphics.ColorUtils.calculateContrast(ink,surface)>=7);
+                        preview.draw(new android.graphics.Canvas(rendered));int letters=0;
+                        for(int y=0;y<rendered.getHeight();y++)for(int x=0;x<rendered.getWidth();x++)if(rendered.getPixel(x,y)==ink)letters++;
+                        assertTrue("Letter must actually be painted above its background",letters>12);
+                        assertTrue("Letter layout must fit vertically",preview.getLayout().getLineBottom(0)<=preview.getHeight()-preview.getPaddingTop()-preview.getPaddingBottom());
+                    } finally {background.recycle();rendered.recycle();}
+                }); } finally {popupTouch(view,down,android.view.MotionEvent.ACTION_CANCEL,0,0);}
+            }
+        } finally {InstrumentationRegistry.getInstrumentation().runOnMainSync(()->{android.content.SharedPreferences.Editor edit=prefs.edit();if(oldTheme instanceof Integer)edit.putInt("petal_theme",(Integer)oldTheme);else edit.remove("petal_theme");edit.apply();});}
+    }
     @Test public void testKeypressPreviewPreferenceAndProtectedFields() throws Exception {
         String preference=dev.fourwags.sumi.inputmethod.latin.settings.Settings.PREF_POPUP_ON;
         try {
