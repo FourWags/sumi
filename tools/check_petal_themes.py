@@ -72,3 +72,10 @@ for name in ['SumiKeyboardView','PetalMainKeyboardView']:
  assert styles[name]['keyPreviewTextColor']=='?attr/sumiPreviewInk'
  assert styles[name]['keyPreviewBackground']=='@drawable/sumi_key_preview'
 print(f'PASS: all 21 dark popup/ivory letter pairs; minimum contrast {min(preview_ratios):.2f}:1.')
+
+assert styles['PetalMainKeyboardView']['keyPreviewHeight']=='@dimen/sumi_key_preview_height'
+base={i.get('name'):i.text for i in E.parse(res/'values/petal_themes.xml').getroot().find("style[@name='PetalTheme']")}
+for attr in ['moreKeysKeyboardViewStyle','moreKeysKeyboardViewForActionStyle']:assert base[attr]=='@style/SumiMoreKeysView'
+for attr in ['keyTextColor','functionalTextColor']:assert styles['SumiMoreKeysView'][attr]=='?attr/sumiPreviewInk'
+assert styles['SumiMoreKeysView']['android:background']=='@drawable/sumi_popup_panel'
+print('PASS: keypress height and both held-key panel styles explicitly use Sumi resources.')

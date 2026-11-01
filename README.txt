@@ -1,4 +1,4 @@
-SUMI — 0.1.5-preview
+SUMI — 0.1.6-preview
 
 Sumi is an offline English-US Android keyboard (IME), for Android 10 and newer.
 Application ID: dev.fourwags.sumi.inputmethod.latin

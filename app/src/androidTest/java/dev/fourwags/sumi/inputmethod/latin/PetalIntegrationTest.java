@@ -169,6 +169,36 @@ public class PetalIntegrationTest {
         }
         return null;
     }
+    @Test public void testLongPressPanelsReadableAndCompactInEveryTheme() throws Exception {
+        android.content.SharedPreferences prefs=DeviceProtectedUtils.getSharedPreferences(activity);
+        field(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE,0,null);
+        for(boolean large:new boolean[]{false,true})for(int theme=0;theme<PetalThemeCatalog.IDS.length;theme++) {
+            final int index=theme;
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(()->prefs.edit().putInt("petal_theme",PetalThemeCatalog.LEGACY_INDICES[index]).putBoolean("petal_large_keys",large).putBoolean("petal_literal",true).putBoolean("popup_on",true).putInt(PetalTypingOptions.PREVIEW_SIZE,100).putBoolean(SettingsValues.PREF_LONG_PRESS_ALTERNATIVES,true).apply());SystemClock.sleep(250);
+            for(int base:new int[]{'f','a'}) {
+                MainKeyboardView view=KeyboardSwitcher.getInstance().getMainKeyboardView();Key key=view.getKeyboard().getKey(base);long down=holdKey(view,key);
+                assertTrue("Long-press panel must open",view.isShowingMoreKeysPanel());MoreKeysKeyboardView panel=shownPanel(view);Key target=panel.getKeyboard().getKey(base=='f'?'%':'@');assertNotNull(target);
+                try {InstrumentationRegistry.getInstrumentation().runOnMainSync(()->{
+                    android.graphics.Bitmap background=android.graphics.Bitmap.createBitmap(panel.getWidth(),panel.getHeight(),android.graphics.Bitmap.Config.ARGB_8888);
+                    android.graphics.Bitmap rendered=android.graphics.Bitmap.createBitmap(panel.getWidth(),panel.getHeight(),android.graphics.Bitmap.Config.ARGB_8888);
+                    try {
+                        panel.getBackground().setBounds(0,0,panel.getWidth(),panel.getHeight());panel.getBackground().draw(new android.graphics.Canvas(background));
+                        int fill=background.getPixel(background.getWidth()/2,background.getHeight()/2);android.util.TypedValue ink=new android.util.TypedValue();panel.getContext().getTheme().resolveAttribute(R.attr.sumiPreviewInk,ink,true);
+                        assertTrue("Held popup must not use a bright platform background",androidx.core.graphics.ColorUtils.calculateLuminance(fill)<=.12);
+                        assertTrue("Held symbol contrast",androidx.core.graphics.ColorUtils.calculateContrast(ink.data,fill)>=7);
+                        panel.draw(new android.graphics.Canvas(rendered));int painted=0;int inset=Math.round(3*panel.getResources().getDisplayMetrics().density);
+                        for(int y=panel.getPaddingTop()+target.getY()+inset;y<Math.min(rendered.getHeight(),panel.getPaddingTop()+target.getY()+target.getHeight()-inset);y++)for(int x=panel.getPaddingLeft()+target.getX()+inset;x<Math.min(rendered.getWidth(),panel.getPaddingLeft()+target.getX()+target.getWidth()-inset);x++)if(rendered.getPixel(x,y)==ink.data)painted++;
+                        assertTrue("Held symbol must be painted clearly",painted>10);
+                        if(index==19&&!large)try(java.io.OutputStream out=new java.io.FileOutputStream(new java.io.File(activity.getExternalFilesDir(null),"synthetic-held-fix-"+base+".png"))){rendered.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out);}catch(java.io.IOException error){throw new RuntimeException(error);}
+                        int[] parentXY=new int[2],popupXY=new int[2];view.getLocationOnScreen(parentXY);panel.getLocationOnScreen(popupXY);
+                        assertTrue("Popup stays inside keyboard's left edge",popupXY[0]>=parentXY[0]);assertTrue("Popup stays inside keyboard's right edge",popupXY[0]+panel.getWidth()<=parentXY[0]+view.getWidth());
+                        assertTrue("Popup stays above its parent key",popupXY[1]+panel.getHeight()<=parentXY[1]+key.getY()+inset*3);
+                        if(base=='f')assertTrue("Single-symbol panel must remain compact",panel.getHeight()<=Math.round(80*panel.getResources().getDisplayMetrics().density));
+                    } finally {background.recycle();rendered.recycle();}
+                });} finally {popupTouch(view,down,android.view.MotionEvent.ACTION_CANCEL,0,0);}
+            }
+        }
+    }
     @Test public void testPopupLetterContrastAcrossAllThemesAndBothLayouts() throws Exception {
         android.content.SharedPreferences prefs=DeviceProtectedUtils.getSharedPreferences(activity);
         Object oldTheme=prefs.getAll().get("petal_theme");
@@ -182,6 +212,7 @@ public class PetalIntegrationTest {
                 long down=SystemClock.uptimeMillis();popupTouch(view,down,0,key.getX()+key.getWidth()/2f,key.getY()+key.getHeight()/2f);SystemClock.sleep(80);
                 try { InstrumentationRegistry.getInstrumentation().runOnMainSync(()->{
                     android.widget.TextView preview=(android.widget.TextView)visiblePreview(ime.getWindow().getWindow().getDecorView());assertNotNull("Popup visible in theme "+index,preview);
+                    assertTrue("Default preview height must be compact",preview.getHeight()<=Math.round(64*preview.getResources().getDisplayMetrics().density));
                     assertEquals("e",preview.getText().toString().toLowerCase(java.util.Locale.US));
                     android.graphics.Bitmap background=android.graphics.Bitmap.createBitmap(preview.getWidth(),preview.getHeight(),android.graphics.Bitmap.Config.ARGB_8888);
                     android.graphics.Bitmap rendered=android.graphics.Bitmap.createBitmap(preview.getWidth(),preview.getHeight(),android.graphics.Bitmap.Config.ARGB_8888);
@@ -194,6 +225,7 @@ public class PetalIntegrationTest {
                         preview.draw(new android.graphics.Canvas(rendered));int letters=0;
                         for(int y=0;y<rendered.getHeight();y++)for(int x=0;x<rendered.getWidth();x++)if(rendered.getPixel(x,y)==ink)letters++;
                         assertTrue("Letter must actually be painted above its background",letters>12);
+                        if(index==19&&!large)try(java.io.OutputStream out=new java.io.FileOutputStream(new java.io.File(activity.getExternalFilesDir(null),"synthetic-keypress-fix.png"))){rendered.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out);}catch(java.io.IOException error){throw new RuntimeException(error);}
                         assertTrue("Letter layout must fit vertically",preview.getLayout().getLineBottom(0)<=preview.getHeight()-preview.getPaddingTop()-preview.getPaddingBottom());
                     } finally {background.recycle();rendered.recycle();}
                 }); } finally {popupTouch(view,down,android.view.MotionEvent.ACTION_CANCEL,0,0);}
